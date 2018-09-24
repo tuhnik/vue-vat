@@ -1,5 +1,5 @@
 # vue-vat
-Proovitöö. Live: [https://tuhnik.github.io/vue-vat](https://tuhnik.github.io/vue-vat)
+Proovitöö. Live: [https://tuhnik.github.io/vue-vat](tuhnik.github.io/vue-vat)
 ## Project setup
 ```
 npm install
