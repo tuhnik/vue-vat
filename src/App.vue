@@ -2,7 +2,9 @@
   <div id="app" class = "container">
   <h1 class="title">{{title}} </h1>
     <form @submit.prevent="submitted()">
+      <div class="control" v-bind:class="{ 'is-loading': isLoading }">
       <input v-model="searchTerm" class="input" type="text" placeholder="Enter VAT number...">
+      </div>
     </form>
     <section>
      <div v-if="result">
@@ -30,20 +32,27 @@ export default {
       title: "VAT number check",
       searchTerm: "",
       result: null,
+      isLoading: false,
       error: null
     };
   },
   methods: {
     submitted() {
+      this.isLoading = true;
       API.search(this.searchTerm).then(data => {
         if (!data.error) {
           this.result = data;
+          this.clearInput()
           this.error = null;
         } else {
           this.result = null;
           this.error = data.error;
         }
+        this.isLoading = false;
       });
+    },
+    clearInput() {
+        this.searchTerm = ""
     }
   }
 };
@@ -66,7 +75,7 @@ table {
   #app {
     width: 75%;
   }
-  @media (max-width: 880px) {
+@media (max-width: 880px) {
     #app {
       width: 95%;
     }
